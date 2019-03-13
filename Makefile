@@ -186,13 +186,13 @@ fpr-build: ##Running the frp-rules
 	docker-compose exec --user=root  archivematica-dashboard /bin/bash -c "apt-get update;apt install libemail-outlook-message-perl cpanminus ghostscript;git clone https://github.com/mvz/email-outlook-message-perl;cpanm /email-outlook-message-perl;cp /email-outlook-message-perl/script/msgconvert /usr/local/bin/msgconvert;pdfDefFile='/usr/share/ghostscript/current/lib/PDFA_def.ps';pdfColourProfile='/usr/share/ghostscript/current/iccprofiles/srgb.icc'"
 
 get_fpr:  ##Running the get-frp-rules
-	docker-compose exec --user=root  archivematica-dashboard /bin/bash -c "home/archivematica/archivematica-fpr/get_fpr_entry.py -t fprule -n XML"
+	docker-compose exec   archivematica-dashboard /bin/bash -c "home/archivematica/archivematica-fpr/get_fpr_entry.py -t fprule -n XML"
 
 delete-fpr:  ##Running the delete-frp-rules
-	docker-compose exec --user=root  archivematica-dashboard /bin/bash -c "home/archivematica/archivematica-fpr/delete_fpr_entry.py -t fprule -i 3a19de70-0e42-4145-976b-3a248d43b462"
+	docker-compose exec   archivematica-dashboard /bin/bash -c "home/archivematica/archivematica-fpr/delete_fpr_entry.py -t fprule -i 3a19de70-0e42-4145-976b-3a248d43b462"
 
 update-fpr: ##Running the update-frp-rules
-	docker-compose exec --user=root  archivematica-dashboard /bin/bash -c  "/home/archivematica/archivematica-fpr/update_fpr.py -f /home/archivematica/archivematica-fpr//updates/office_preservation.json -s /home/archivematica/archivematica-fpr/schemas/fpr_schema.json"
+	docker-compose exec   archivematica-dashboard /bin/bash -c  "/home/archivematica/archivematica-fpr/update_fpr.py -f /home/archivematica/archivematica-fpr/updates/office_preservation.json -s /home/archivematica/archivematica-fpr/schemas/fpr_schema.json"
 
 help:  ## Print this help message.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
